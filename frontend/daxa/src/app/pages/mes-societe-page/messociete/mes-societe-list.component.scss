@@ -1,0 +1,23 @@
+.mes-societes-card {
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  mat-list-item {
+    margin-bottom: 10px;
+  }
+  .societe-selection-area {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 100vh; /* Ensure full viewport height */
+  }
+  
+  .daxa-form {
+    width: 100%;
+    max-width: 600px; /* You can adjust this width to control the card size */
+    margin: 0 auto; /* Centers the card horizontally */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  

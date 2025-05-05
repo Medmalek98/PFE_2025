@@ -1,0 +1,86 @@
+.affectation-wrapper {
+    .mat-expansion-panel {
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  
+    .mat-expansion-panel-header {
+      background-color: transparent !important;
+      font-weight: 500;
+      font-size: 15px;
+    }
+  
+    .mat-expansion-panel-body {
+      background-color: #2a2a3c !important;
+      padding: 12px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  
+  
+    .scrollable-panel {
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 8px;
+      margin-top: 12px;
+  
+      scrollbar-width: thin;
+      scrollbar-color: #ccc transparent;
+  
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+  
+      &::-webkit-scrollbar-thumb {
+        background-color: #bbb;
+        border-radius: 10px;
+      }
+  
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+    }
+  
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+  
+    .form-half {
+      flex: 1 1 48%;
+      min-width: 300px;
+    }
+  
+    @media (max-width: 768px) {
+      .form-half {
+        flex: 1 1 100%;
+      }
+    }
+  
+    .section-card {
+      margin-bottom: 30px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+  
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
+
+  .societe-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px; // petit espace à droite
+  }
+  .form-section,
+  .assignment-section {
+    flex: 1 1 48%; // responsive half width with small gap
+  }
+
+  

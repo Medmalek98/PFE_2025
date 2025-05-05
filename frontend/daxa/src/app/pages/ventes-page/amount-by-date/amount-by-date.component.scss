@@ -1,0 +1,45 @@
+// :host {
+//     display: block;
+  
+//     mat-card {
+//       border-radius: 1rem;
+//       padding: 1.5rem;
+//       color: #212529;
+//       transition: background-color 0.3s, color 0.3s;
+  
+//       mat-card-title {
+//         font-size: 1.2rem;
+//         font-weight: 600;
+//       }
+  
+//       .chart {
+//         margin-top: 1rem;
+//       }
+  
+//       mat-form-field {
+//         width: 100%;
+//         margin-bottom: 1rem;
+//       }
+//     }
+  
+//     .component-dark-theme & mat-card {
+//       background-color: #1e1e2f;
+//       border-color: #333;
+//     }
+  
+//     .rtl-enabled & mat-card {
+//       direction: rtl;
+//       text-align: right;
+//     }
+//   }
+  
+:host {
+    display: block;
+  
+    mat-card {
+      .chart {
+        margin-top: 1rem;
+      }
+    }
+  }
+  

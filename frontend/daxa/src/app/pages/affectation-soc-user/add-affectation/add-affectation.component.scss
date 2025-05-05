@@ -1,0 +1,21 @@
+.full-width {
+  width: 70%;
+  margin-bottom: 16px;
+}
+
+.half-width {
+  width: 48%;
+  margin-bottom: 16px;
+  margin-right: 2%;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.main-label {
+  margin-bottom: 12px;
+}
+

@@ -1,0 +1,123 @@
+<!-- Breadcrumb -->
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-between">
+    <h5 class="mb-0">Add Company</h5>
+    <ol class="breadcrumb list-unstyled mt-0 mb-0 pl-0">
+      <li class="breadcrumb-item position-relative">
+        <a routerLink="/" class="d-inline-block position-relative">
+          <i class="ri-home-8-line"></i>
+          Dashboard
+        </a>
+      </li>
+      <li class="breadcrumb-item position-relative">Companies list</li>
+      <li class="breadcrumb-item position-relative">Add Company</li>
+    </ol>
+  </div>
+  
+  <!-- Add Societe Form -->
+  <div class="row">
+    <div class="col-xxl-7 col-xxxl-8">
+      <mat-card class="daxa-card add-user-card mb-25 border-radius bg-white border-none d-block">
+        <mat-card-header>
+          <mat-card-title>
+            <h5 class="mb-0">Add Company</h5>
+          </mat-card-title>
+        </mat-card-header>
+  
+        <mat-card-content>
+          <form [formGroup]="societeForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <!-- Societe Name -->
+              <div class="col-sm-6">
+                <div class="mb-25">
+                  <label class="main-label text-black">Company Name</label>
+                  <mat-form-field>
+                    <mat-label>Enter company name</mat-label>
+                    <input matInput formControlName="societeName" />
+                  </mat-form-field>
+                </div>
+              </div>
+  
+              <!-- Matricule Fiscal -->
+              <div class="col-sm-6">
+                <div class="mb-25">
+                  <label class="main-label text-black">Matricule Fiscal</label>
+                  <mat-form-field>
+                    <mat-label>Enter matricule fiscal</mat-label>
+                    <input matInput formControlName="matriculeFiscal" />
+                  </mat-form-field>
+                </div>
+              </div>
+  
+              <!-- Debut Contract -->
+              <div class="col-sm-6">
+                <div class="mb-25">
+                  <label class="main-label text-black">Debut Contract</label>
+                  <mat-form-field>
+                    <mat-label>Choose start date</mat-label>
+                    <input matInput [matDatepicker]="startPicker" formControlName="debutContract" />
+                    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+  
+              <!-- Fin Contract -->
+              <div class="col-sm-6">
+                <div class="mb-25">
+                  <label class="main-label text-black">Fin Contract</label>
+                  <mat-form-field>
+                    <mat-label>Choose end date</mat-label>
+                    <input matInput [matDatepicker]="endPicker" formControlName="finContract" />
+                    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+  
+              <!-- IP Address -->
+              <div class="col-sm-6">
+                <div class="mb-25">
+                  <label class="main-label text-black">IP Address</label>
+                  <mat-form-field>
+                    <mat-label>Enter IP address</mat-label>
+                    <input matInput formControlName="ipadresse" />
+                  </mat-form-field>
+                </div>
+              </div>
+  
+              <!-- Nom Contact -->
+              <div class="col-sm-6">
+                <div class="mb-25">
+                  <label class="main-label text-black">Contact Name</label>
+                  <mat-form-field>
+                    <mat-label>Enter contact name</mat-label>
+                    <input matInput formControlName="nomContact" />
+                  </mat-form-field>
+                </div>
+              </div>
+  
+              <!-- Num Contact -->
+              <div class="col-sm-6">
+                <div class="mb-25">
+                  <label class="main-label text-black">Contact Number</label>
+                  <mat-form-field>
+                    <mat-label>Enter contact number</mat-label>
+                    <input matInput formControlName="numContact" />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Buttons -->
+            <div class="btn-box">
+              <button mat-button color="primary" type="submit" [disabled]="societeForm.invalid">
+                Add Societe
+              </button>
+              <button mat-button type="button">Cancel</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  

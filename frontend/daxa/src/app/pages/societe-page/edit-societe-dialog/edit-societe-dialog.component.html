@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Edit Company</h2>
+<mat-dialog-content>
+    <form [formGroup]="form">
+        <div class="form-grid">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Company Name</mat-label>
+                <input matInput formControlName="societeName">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Matricule Fiscal</mat-label>
+                <input matInput formControlName="matriculeFiscal">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Start Date</mat-label>
+                <input matInput type="date" formControlName="debutContract">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>End Date</mat-label>
+                <input matInput type="date" formControlName="finContract">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>IP Address</mat-label>
+                <input matInput formControlName="ipadresse">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Contact Name</mat-label>
+                <input matInput formControlName="nomContact">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Contact Number</mat-label>
+                <input matInput formControlName="numContact">
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="save()" [disabled]="!form.valid">Save</button>
+</mat-dialog-actions>

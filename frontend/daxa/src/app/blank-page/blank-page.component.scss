@@ -1,0 +1,13 @@
+.blank-page {
+    app-sidebar,
+    app-header,
+    app-footer,
+    app-customizer-settings {
+      display: none !important;
+    }
+    .main-content {
+      margin-left: 0;
+      padding: 0;
+    }
+  }
+  

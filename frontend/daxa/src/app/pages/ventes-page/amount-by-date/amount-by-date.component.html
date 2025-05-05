@@ -1,0 +1,22 @@
+<div class="daxa-form ml-auto mr-auto border-radius bg-white" 
+     [class.card-borderd-theme]="themeService.isCardBorder()"
+     [class.component-dark-theme]="themeService.isDark()"
+     [class.rtl-enabled]="themeService.isRTLEnabled()">
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Amount By Date</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="chart">
+      <apx-chart *ngIf="isChartReady"
+                 [series]="chartOptions.series"
+                 [chart]="chartOptions.chart"
+                 [xaxis]="chartOptions.xaxis"
+                 [stroke]="chartOptions.stroke!"
+                 [title]="chartOptions.title!"
+                 [dataLabels]="chartOptions.dataLabels!">
+      </apx-chart>
+    </div>
+  </mat-card-content>
+</mat-card>
+</div>

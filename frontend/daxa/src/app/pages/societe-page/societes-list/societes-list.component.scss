@@ -1,0 +1,88 @@
+.mat-mdc-card {
+    &.daxa-card {
+      &.societes-card {
+        .mat-mdc-card-content {
+          margin: {
+            left: -20px;
+            right: -20px;
+          }
+  
+          .societes-table {
+            .mat-mdc-table {
+              .mat-mdc-header-cell,
+              .mat-mdc-cell {
+                &:last-child {
+                  text-align: right;
+                }
+              }
+            }
+          }
+        }
+  
+        &.rtl-enabled {
+          .mat-mdc-card-content {
+            .societes-table {
+              .mat-mdc-table {
+                .mat-mdc-header-cell,
+                .mat-mdc-cell {
+                  &:last-child {
+                    text-align: left;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  ::ng-deep {
+    .mat-mdc-card.daxa-card.societes-card .mat-mdc-card-content .societes-table .mat-mdc-paginator {
+      padding: {
+        top: 15px;
+        left: 20px;
+        right: 20px;
+      }
+    }
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .mat-mdc-card.daxa-card.societes-card {
+      .mat-mdc-card-header .add-new-btn {
+        margin-top: 12px;
+      }
+  
+      .mat-mdc-card-content {
+        margin: {
+          left: -15px;
+          right: -15px;
+        }
+      }
+  
+      &.rtl-enabled .mat-mdc-card-content .societes-table .mat-mdc-table {
+        .mat-mdc-header-cell,
+        .mat-mdc-cell {
+          text-align: left;
+        }
+      }
+    }
+  
+    ::ng-deep .mat-mdc-card.daxa-card.societes-card .mat-mdc-paginator {
+      padding: {
+        top: 10px;
+        left: 15px;
+        right: 15px;
+      }
+    }
+  }
+  
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    .mat-mdc-card.daxa-card.societes-card .mat-mdc-card-content {
+      margin: {
+        left: -20px;
+        right: -20px;
+      }
+    }
+  }
+  

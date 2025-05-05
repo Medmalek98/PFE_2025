@@ -1,0 +1,102 @@
+<!-- Breadcrumb -->
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-between">
+    <h5 class="mb-0">Companies List</h5>
+    <ol class="breadcrumb list-unstyled mt-0 mb-0 pl-0">
+        <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+        <li class="breadcrumb-item">Companies</li>
+        <li class="breadcrumb-item">Comapny List</li>
+    </ol>
+</div>
+
+<!-- Table Card -->
+<mat-card class="daxa-card societes-card mb-25 bg-white border-none d-block"
+    [class.rtl-enabled]="themeService.isRTLEnabled()">
+    <mat-card-header>
+        <mat-card-title>
+            <form class="search-box position-relative">
+                <i class="material-symbols-outlined">search</i>
+                <input type="text" class="input-search d-block w-100 border-none outline-0"
+                    placeholder="Search societe..." (keyup)="applyFilter($event)" #input>
+            </form>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <a mat-button class="add-new-btn" routerLink="/societe-page/add-societe">+ Add New Company</a>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="societes-table">
+            <div class="table-responsive">
+                <table mat-table [dataSource]="dataSource">
+
+                    <!-- All Societe Columns -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef>Company's ID</th>
+                        <td mat-cell *matCellDef="let s">{{ s.id }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="societeName">
+                        <th mat-header-cell *matHeaderCellDef>Comapny Name</th>
+                        <td mat-cell *matCellDef="let s">{{ s.societeName }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="matriculeFiscal">
+                        <th mat-header-cell *matHeaderCellDef>Matricule Fiscal</th>
+                        <td mat-cell *matCellDef="let s">{{ s.matriculeFiscal }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="debutContract">
+                        <th mat-header-cell *matHeaderCellDef>Start Date</th>
+                        <td mat-cell *matCellDef="let s">{{ s.debutContract }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="finContract">
+                        <th mat-header-cell *matHeaderCellDef>End Date</th>
+                        <td mat-cell *matCellDef="let s">{{ s.finContract }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="ipadresse">
+                        <th mat-header-cell *matHeaderCellDef>IP Address</th>
+                        <td mat-cell *matCellDef="let s">{{ s.ipadresse }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="nomContact">
+                        <th mat-header-cell *matHeaderCellDef>Contact Name</th>
+                        <td mat-cell *matCellDef="let s">{{ s.nomContact }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="numContact">
+                        <th mat-header-cell *matHeaderCellDef>Contact Number</th>
+                        <td mat-cell *matCellDef="let s">{{ s.numContact }}</td>
+                    </ng-container>
+
+                    <!-- Action -->
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                        <td mat-cell *matCellDef="let s">
+                            <div class="action-info">
+                                <button mat-button matTooltip="View" matTooltipPosition="above"
+                                    (click)="openViewDialog(s)">
+                                    <i class="material-symbols-outlined">visibility</i>
+                                </button>
+
+                                <button type="button" mat-button matTooltip="Edit" matTooltipPosition="above"
+                                    (click)="openEditDialog(s)">
+                                    <i class="material-symbols-outlined">Edit</i>
+                                </button>
+
+                                <button mat-button (click)="deleteSociete(s.id)" matTooltip="Delete"
+                                    matTooltipPosition="above">
+                                    <i class="material-symbols-outlined">delete</i>
+                                </button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="9">No data matching the filter "{{ input.value }}"</td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <!-- Paginator -->
+            <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+        </div>
+    </mat-card-content>
+
+</mat-card>

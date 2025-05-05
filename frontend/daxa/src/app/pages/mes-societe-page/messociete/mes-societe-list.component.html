@@ -1,0 +1,39 @@
+<div class="societe-selection-area">
+  <div class="daxa-form ml-auto mr-auto border-radius bg-white"
+       [class.card-borderd-theme]="themeService.isCardBorder()"
+       [class.component-dark-theme]="themeService.isDark()"
+       [class.rtl-enabled]="themeService.isRTLEnabled()">
+    
+    <div class="d-table">
+      <div class="d-table-cell">
+        <div class="title text-center">
+          <h3>Choosing Company</h3>
+          <p class="text-black">
+            Choose your Company please ! .
+          </p>
+        </div>
+
+        <div *ngIf="userSocietes.length > 0; else noSocietes">
+          <form [formGroup]="societeForm" (ngSubmit)="onSelectSociete()">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Company</mat-label>
+              <mat-select formControlName="selectedSociete">
+                <mat-option *ngFor="let societe of userSocietes" [value]="societe">
+                  {{ societe.societeName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="societeForm.invalid">
+              Access
+            </button>
+          </form>
+        </div>
+
+        <ng-template #noSocietes>
+          <p class="text-center">Any Company Related to you.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

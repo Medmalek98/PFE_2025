@@ -1,0 +1,85 @@
+<!-- Assign Company to Users -->
+<div class="affectation-wrapper">
+
+  <div
+        class="daxa-form ml-auto mr-auto border-radius bg-white"
+        [class.card-borderd-theme]="themeService.isCardBorder()"
+        [class.component-dark-theme]="themeService.isDark()"
+        [class.rtl-enabled]="themeService.isRTLEnabled()"
+      >
+<mat-card class="section-card" >
+    <h2>Assign Company to Users</h2>
+  
+    <form [formGroup]="form" class="form-row">
+      <div class="form-half">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Companies</mat-label>
+          <mat-select formControlName="selectedSociete">
+            <mat-option *ngFor="let societe of societes" [value]="societe">
+              {{ societe.societeName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <div class="form-half">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Users</mat-label>
+          <mat-select formControlName="selectedUsers" multiple>
+            <mat-option *ngFor="let user of users" [value]="user">
+              {{ user.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <div class="btn-box">
+        <button mat-raised-button color="primary" type="submit" (click)="assignUsersToSociete()">
+          Assign
+        </button>
+      </div>
+    </form>
+  </mat-card>
+  
+  <!-- Assignment List -->
+  <mat-card class="section-card">
+    <h2>Assignment List (User Name / Company Name) </h2>
+    <div class="form-section">
+    <mat-card-content>
+      <div class="scrollable-panel">
+        <mat-accordion class="basic-expansion">
+          <mat-expansion-panel *ngFor="let item of affectations">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ item.user.username }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+  
+            <ul class="pl-4">
+              <li *ngFor="let societe of item.societes">
+                <div class="societe-row">
+                  <span>{{ societe.societeName }}</span>
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    *ngIf="societe.id && item.user.id"
+                    (click)="confirmRemoveUserFromSociete(societe.id, item.user.id, societe.societeName, item.user.username)"
+                    matTooltip="Remove assignment"
+                    matTooltipPosition="above"
+                  >
+                    <i class="material-symbols-outlined">delete</i>
+                  </button>
+                </div>
+              </li>
+              
+              
+              </ul>
+              
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-card-content>
+    </div>
+  </mat-card>
+  </div>
+  </div>
