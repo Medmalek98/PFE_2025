@@ -202,6 +202,8 @@ import { AddAffectationComponent } from './pages/affectation-soc-user/add-affect
 import { AffectationListComponent } from './pages/affectation-soc-user/affectation-list/affectation-list.component';
 import { MesSocieteListComponent } from './pages/mes-societe-page/messociete/mes-societe-list.component';
 import { VentesComponent } from './pages/ventes-page/ventes-page.component';
+import { VentesBLComponent } from './pages/ventes-page/ventes-bl/ventes-bl.component';
+import { VentesFACComponent } from './pages/ventes-page/ventes-fac/ventes-fac.component';
 
 export const routes: Routes = [
 
@@ -274,6 +276,17 @@ export const routes: Routes = [
             { path: 'reviews', component: EReviewsComponent }
         ]
     },
+
+    {
+        path: 'ventes',
+        component: VentesComponent,
+        children: [
+          { path: '', redirectTo: 'ventes-bl', pathMatch: 'full' },
+          { path: 'ventes-bl', component: VentesBLComponent },
+          { path: 'ventes-fac', component: VentesFACComponent }
+        ]
+      },  
+
     {
         path: 'crm-page',
         component: CrmPageComponent,

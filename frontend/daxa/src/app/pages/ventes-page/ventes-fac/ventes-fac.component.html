@@ -1,0 +1,40 @@
+<div class="daxa-form ml-auto mr-auto border-radius bg-white" 
+     [class.card-borderd-theme]="themeService.isCardBorder()"
+     [class.component-dark-theme]="themeService.isDark()"
+     [class.rtl-enabled]="themeService.isRTLEnabled()">
+
+<mat-card class="daxa-card mb-25 border-radius bg-white border-none d-block">
+  <mat-card-header>
+    <mat-card-title>
+      <h5 class="mb-0">Date Range Picker </h5>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Start date">
+        <input matEndDate formControlName="end" placeholder="End date">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <!-- <p>Selected range: {{ range.value | json }}</p> -->
+  </mat-card-content>
+</mat-card>
+
+<app-amount-by-date
+  [isChartReady]="isChartReady"
+  [chartOptions]="chartOptions"
+></app-amount-by-date>
+
+<div class="row">
+  <div class="col-md-6">
+    <app-total-revenue [totalRevenue]="totalRevenue"></app-total-revenue>
+  </div>
+  <div class="col-md-6">
+    <app-date-range-revenue [totalRevenueInDateRange]="totalRevenueInDateRange"></app-date-range-revenue>
+  </div>
+</div>
+</div>

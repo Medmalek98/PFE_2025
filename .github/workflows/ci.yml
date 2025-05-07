@@ -1,0 +1,45 @@
+name: CI - Build Backend & Frontend
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v3
+
+    - name: 🔧 Set up Java 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: ⚙️ Build Spring Boot backend
+      working-directory: ./backend
+      run: |
+        ./mvnw clean install -DskipTests=true
+
+    - name: 🔧 Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: 📦 Install Angular dependencies
+      working-directory: ./frontend
+      run: npm install
+
+    - name: 🏗️ Build Angular project
+      working-directory: ./frontend
+      run: npm run build -- --configuration production
