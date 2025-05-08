@@ -36,7 +36,7 @@
                         </mat-expansion-panel-header>
                         <ul class="sidebar-sub-menu">
                             <li class="sidemenu-item">
-                                <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                <a routerLink="/ecommerce" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                                     class="sidemenu-link">
                                     E-Commerce
                                 </a>
@@ -52,6 +52,13 @@
                                 <a routerLink="/ventes" routerLinkActive="active"
                                     [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     Sales
+                                </a>
+                            </li>
+
+                            <li class="sidemenu-item">
+                                <a routerLink="/achats" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Purchases
                                 </a>
                             </li>
 
@@ -361,11 +368,33 @@
                         </ul>
                     </mat-expansion-panel>
 
+                    
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <i class="material-symbols-outlined">
-                                    receipt_long	
+                                    inventory_2	
+                                </i>
+                                <span class="title">
+                                    Purchases 
+                                </span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/achats/achats-list" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Purchases-list
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="material-symbols-outlined">
+                                    trending_up	
                                 </i>
                                 <span class="title">
                                     Sales 

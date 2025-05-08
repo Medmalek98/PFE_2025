@@ -204,6 +204,9 @@ import { MesSocieteListComponent } from './pages/mes-societe-page/messociete/mes
 import { VentesComponent } from './pages/ventes-page/ventes-page.component';
 import { VentesBLComponent } from './pages/ventes-page/ventes-bl/ventes-bl.component';
 import { VentesFACComponent } from './pages/ventes-page/ventes-fac/ventes-fac.component';
+import { AchatsPageComponent } from './pages/achats-page/achats-page.component';
+import { AchatsListComponent } from './pages/achats-page/achat-list/achats-list.component';
+
 
 export const routes: Routes = [
 
@@ -216,9 +219,10 @@ export const routes: Routes = [
     },
 
     
-    { path: '', component: EcommerceComponent },
+    { path: 'ecommerce', component: EcommerceComponent },
     { path: 'crm', component: CrmComponent },
     { path: 'ventes', component: VentesComponent },
+    { path: 'achats', component: AchatsPageComponent },
     { path: 'project-management', component: ProjectManagementComponent },
     { path: 'lms', component: LmsComponent },
     { path: 'help-desk', component: HelpDeskComponent },
@@ -284,6 +288,16 @@ export const routes: Routes = [
           { path: '', redirectTo: 'ventes-bl', pathMatch: 'full' },
           { path: 'ventes-bl', component: VentesBLComponent },
           { path: 'ventes-fac', component: VentesFACComponent }
+        ]
+      },
+
+      {
+        path: 'achats',
+        component: AchatsPageComponent,
+        children: [
+          { path: '', redirectTo: 'achats-page', pathMatch: 'full' },
+          { path: 'achats-list', component: AchatsListComponent }
+
         ]
       },  
 

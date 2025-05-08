@@ -1,112 +1,207 @@
-  <div
-        class="daxa-form ml-auto mr-auto border-radius bg-white"
-        [class.card-borderd-theme]="themeService.isCardBorder()"
-        [class.component-dark-theme]="themeService.isDark()"
-        [class.rtl-enabled]="themeService.isRTLEnabled()">
- <mat-horizontal-stepper linear #stepper>
-  <!-- Étape 1 : Société -->
-  <mat-step [stepControl]="societeForm">
-    <form [formGroup]="societeForm">
-      <ng-template matStepLabel>Company Informations</ng-template>
+<mat-card class="daxa-card mb-25 border-radius bg-white border-none d-block">
+  <mat-card-header>
+      <mat-card-title>
+          <h5 class="mb-0">
+              Company Assignment
+          </h5>
+      </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <mat-horizontal-stepper linear #stepper>
+          <!-- Step 1: Company Information -->
+          <mat-step [stepControl]="societeForm">
+              <ng-template matStepLabel>Company Information</ng-template>
+              <form [formGroup]="societeForm">
+                  <div class="row">
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Company Name*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Enter company name</mat-label>
+                                  <input matInput formControlName="societeName" required>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Contact Name*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Enter contact name</mat-label>
+                                  <input matInput formControlName="nomContact" required>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Contact Number*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Enter contact number</mat-label>
+                                  <input matInput formControlName="numContact" required>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Matricule Fiscal*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Enter matricule fiscal</mat-label>
+                                  <input matInput formControlName="matriculeFiscal" required>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Start Date*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Choose start date</mat-label>
+                                  <input matInput [matDatepicker]="picker1" formControlName="debutContract" required>
+                                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker1></mat-datepicker>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  End Date*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Choose end date</mat-label>
+                                  <input matInput [matDatepicker]="picker2" formControlName="finContract" required>
+                                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker2></mat-datepicker>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  IP Address*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Enter IP address</mat-label>
+                                  <input matInput formControlName="ipadresse" required>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <button mat-flat-button matStepperNext class="daxa" [disabled]="societeForm.invalid">Next</button>
+                  </div>
+              </form>
+          </mat-step>
 
-      <!-- Champs du formulaire Société -->
-      <mat-form-field class="half-width">
-        <mat-label>Company Name</mat-label>
-        <input matInput formControlName="societeName" required />
-      </mat-form-field>
+          <!-- Step 2: User Information -->
+          <mat-step [stepControl]="userForm">
+              <ng-template matStepLabel>User Information</ng-template>
+              <form [formGroup]="userForm">
+                  <div class="row">
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Name of User*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Enter user name</mat-label>
+                                  <input matInput formControlName="name" required>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Username*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Enter username</mat-label>
+                                  <input matInput formControlName="username" required>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Email*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Enter email</mat-label>
+                                  <input matInput formControlName="email" required>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Password*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Enter password</mat-label>
+                                  <input matInput formControlName="password" type="password" required>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                          <div class="mb-20">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Roles*
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>Select roles</mat-label>
+                                  <mat-select formControlName="roles" multiple required>
+                                      <mat-option value="ROLE_USER">ROLE_USER</mat-option>
+                                      <mat-option value="ROLE_ADMIN">ROLE_ADMIN</mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <button mat-flat-button matStepperPrevious class="mr-15">Back</button>
+                      <button mat-flat-button matStepperNext class="daxa" [disabled]="userForm.invalid">Next</button>
+                  </div>
+              </form>
+          </mat-step>
 
-      <mat-form-field class="half-width">
-        <mat-label>Contact Name</mat-label>
-        <input matInput formControlName="nomContact" required />
-      </mat-form-field>
-
-      <mat-form-field class="half-width">
-        <mat-label>Contact Num</mat-label>
-        <input matInput formControlName="numContact" required />
-      </mat-form-field>
-
-      <mat-form-field class="half-width">
-        <mat-label>Start Date</mat-label>
-        <input matInput [matDatepicker]="picker1" formControlName="debutContract" required />
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field class="half-width">
-        <mat-label>End Date</mat-label>
-        <input matInput [matDatepicker]="picker2" formControlName="finContract" required />
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field class="half-width">
-        <mat-label>IP Adresse</mat-label>
-        <input matInput formControlName="ipadresse" required />
-      </mat-form-field>
-
-      <mat-form-field class="half-width">
-        <mat-label>Matricule fiscal</mat-label>
-        <input matInput formControlName="matriculeFiscal" required />
-      </mat-form-field>
-
-      <div>
-        <button mat-button matStepperNext [disabled]="societeForm.invalid">Next</button>
-      </div>
-    </form>
-  </mat-step>
-
-  <!-- Étape 2 : Utilisateur -->
-  <mat-step [stepControl]="userForm">
-    <form [formGroup]="userForm">
-      <ng-template matStepLabel>User Informations</ng-template>
-
-      <!-- Champs du formulaire Utilisateur -->
-      <mat-form-field class="full-width">
-        <mat-label>Name of User</mat-label>
-        <input matInput formControlName="name" required />
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label>User Name</mat-label>
-        <input matInput formControlName="username" required />
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" required />
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password" required />
-      </mat-form-field>
-
-      <div class="col-sm-12">
-        <div class="mb-25">
-          <label class="main-label d-block lh-1 text-black">Roles</label>
-          <mat-form-field>
-            <mat-label>Select roles</mat-label>
-            <mat-select formControlName="roles" multiple>
-              <mat-option value="ROLE_USER">ROLE_USER</mat-option>
-              <mat-option value="ROLE_ADMIN">ROLE_ADMIN</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div>
-        <button mat-button matStepperNext [disabled]="userForm.invalid">Next</button>
-      </div>
-    </form>
-  </mat-step>
-
-  <!-- Étape 3 : Affectation -->
-  <mat-step>
-    <ng-template matStepLabel>Assignment</ng-template>
-    <p><strong>Company Name :</strong> {{ societeForm.value.societeName }}</p>
-    <p><strong>User Name :</strong> {{ userForm.value.username }}</p>
-    <button mat-raised-button color="primary" (click)="assignUserToSociete()">Assign</button>
-  </mat-step>
-  
-</mat-horizontal-stepper>
+          <!-- Step 3: Assignment -->
+          <mat-step>
+              <ng-template matStepLabel>Assignment</ng-template>
+              <div class="confirmation-details">
+                  <h4 class="mb-20">Confirmation</h4>
+                  <div class="row">
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <h5>Company Information</h5>
+                              <p><strong>Name:</strong> {{ societeForm.value.societeName }}</p>
+                              <p><strong>Contact:</strong> {{ societeForm.value.nomContact }}</p>
+                              <p><strong>Matricule Fiscal:</strong> {{ societeForm.value.matriculeFiscal }}</p>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="mb-20">
+                              <h5>User Information</h5>
+                              <p><strong>Name:</strong> {{ userForm.value.name }}</p>
+                              <p><strong>Username:</strong> {{ userForm.value.username }}</p>
+                              <p><strong>Email:</strong> {{ userForm.value.email }}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div>
+                  <button mat-flat-button matStepperPrevious class="mr-15">Back</button>
+                  <button mat-flat-button color="primary" (click)="assignUserToSociete()">Confirm Assignment</button>
+              </div>
+          </mat-step>
+      </mat-horizontal-stepper>
+  </mat-card-content>
+</mat-card>
 

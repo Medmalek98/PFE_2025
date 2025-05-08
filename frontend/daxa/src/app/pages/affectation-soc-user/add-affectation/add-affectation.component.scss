@@ -1,21 +1,74 @@
-.full-width {
-  width: 70%;
-  margin-bottom: 16px;
+/* Add this to your component's SCSS file */
+.daxa-card {
+  .mat-mdc-card-content {
+      padding: 25px;
+  }
+
+  .mat-stepper-horizontal {
+      background: transparent;
+      margin-top: 20px;
+  }
+
+  .mat-step-header .mat-step-label {
+      font-weight: 500;
+  }
+
+  .mat-form-field {
+      width: 100%;
+  }
+
+  .confirmation-details {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+
+      h5 {
+          font-size: 16px;
+          margin-bottom: 15px;
+          color: #333;
+      }
+
+      p {
+          margin-bottom: 8px;
+          color: #555;
+      }
+  }
+
+  .daxa {
+      background-color: #5d87ff;
+      color: white;
+  }
+
+  .mr-15 {
+      margin-right: 15px;
+  }
+
+  .mb-20 {
+      margin-bottom: 20px;
+  }
+
+  .main-label {
+      margin-bottom: 12px;
+      font-weight: 500;
+      color: #333;
+  }
 }
 
-.half-width {
-  width: 48%;
-  margin-bottom: 16px;
-  margin-right: 2%;
-}
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .daxa-card {
+      .mat-mdc-card-content {
+          padding: 15px;
+      }
 
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+      .row > div {
+          padding-left: 8px;
+          padding-right: 8px;
+      }
 
-.main-label {
-  margin-bottom: 12px;
+      .mb-20 {
+          margin-bottom: 15px;
+      }
+  }
 }
-
