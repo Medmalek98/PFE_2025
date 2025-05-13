@@ -1,0 +1,51 @@
+<div class="daxa-form ml-auto mr-auto border-radius bg-white"
+  [class.card-bordered-theme]="themeService.isCardBorder()"
+  [class.component-dark-theme]="themeService.isDark()"
+  [class.rtl-enabled]="themeService.isRTLEnabled()">
+
+  <!-- Date Picker -->
+  <mat-card class="mb-4 p-3">
+    <form [formGroup]="range" class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="startPicker" formControlName="start">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="endPicker" formControlName="end">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card>
+
+  <!-- Charts Container -->
+  <mat-card class="chart-container">
+    <mat-card-header>
+      <mat-card-title>
+        <h5 class="title" [class.text-white]="themeService.isDark()">Distribution by article</h5>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="isLoading" class="loading-spinner">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+
+      <div class="charts-wrapper">
+        <div id="article_pie_chart_top" class="chart-item" [class.hidden]="!isChartReady.top"></div>
+        <div id="article_pie_chart_bottom" class="chart-item" [class.hidden]="!isChartReady.bottom"></div>
+      </div>
+
+      <div *ngIf="!isLoading && (!isChartReady.top || !isChartReady.bottom)" class="no-data">
+        <mat-icon>info</mat-icon>
+        <span>No data available for this period</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

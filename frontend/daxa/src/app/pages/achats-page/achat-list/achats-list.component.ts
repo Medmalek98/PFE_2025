@@ -110,4 +110,10 @@ export class AchatsListComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, 'TopRefArticles');
     XLSX.writeFile(wb, 'TopRefArticles.xlsx');
   }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
 }

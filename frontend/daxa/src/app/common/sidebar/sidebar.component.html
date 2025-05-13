@@ -382,11 +382,25 @@
                         </mat-expansion-panel-header>
                         <ul class="sidebar-sub-menu">
                             <li class="sidemenu-item">
+                                <a routerLink="/achats/achats-rated-month" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Purchases-Rated-Month
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
                                 <a routerLink="/achats/achats-list" routerLinkActive="active"
                                     [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     Purchases-list
                                 </a>
                             </li>
+
+                            <li class="sidemenu-item">
+                                <a routerLink="/achats/achats-per-article" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Purchases-Per-Article
+                                </a>
+                            </li>
+
                         </ul>
                     </mat-expansion-panel>
 

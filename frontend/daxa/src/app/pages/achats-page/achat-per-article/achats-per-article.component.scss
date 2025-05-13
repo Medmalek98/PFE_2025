@@ -1,0 +1,102 @@
+.chart-container {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  overflow: hidden;
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #1a237e;
+    padding: 1rem 0 0 1rem;
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 400px;
+}
+
+.charts-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+  min-height: 500px;
+
+  .chart-item {
+    position: relative;
+    padding: 1rem;
+    
+    &:not(:empty) {
+      min-height: 400px;
+    }
+  }
+}
+
+.no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  color: #666;
+  font-size: 0.9rem;
+  
+  mat-icon {
+    color: #999;
+    font-size: 1.2rem;
+    height: auto;
+    width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .charts-wrapper {
+    grid-template-columns: 1fr;
+    
+    .chart-item {
+      min-height: 300px !important;
+    }
+  }
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+  
+  .mdc-text-field {
+    background-color: white !important;
+    border-radius: 8px !important;
+  }
+}
+
+.title {
+    // Default color for light mode
+    color: #1a237e;  // Your existing dark blue color
+    
+    // Dark mode override
+    .component-dark-theme & {
+        color: white !important;
+    }
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.rtl-enabled {
+  direction: rtl;
+  text-align: right;
+  
+  .mat-form-field {
+    text-align: right;
+  }
+  
+  /* Add other RTL-specific adjustments */
+}

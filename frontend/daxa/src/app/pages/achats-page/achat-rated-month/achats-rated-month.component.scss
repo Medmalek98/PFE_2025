@@ -1,0 +1,52 @@
+.daxa-card {
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+  h5 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+}
+
+.highest-month-note {
+  text-align: center;
+  font-size: 16px;
+  color: #2e7d32;
+  padding: 8px;
+  background-color: #e8f5e9;
+  border-radius: 4px;
+  margin: 15px 0;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+  color: #666;
+  font-size: 16px;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.p-3 {
+  padding: 1rem;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+#inflation-column-chart {
+  .apexcharts-xaxis-label {
+    transform: rotate(-45deg);
+    text-anchor: end;
+  }
+  
+  .apexcharts-data-labels text {
+    font-weight: 600 !important;
+  }
+}

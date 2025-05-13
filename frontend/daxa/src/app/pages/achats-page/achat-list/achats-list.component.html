@@ -1,96 +1,107 @@
 <mat-card class="mb-4 p-3">
-    <form [formGroup]="range" class="row">
-      <div class="col-md-6">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Date de début</mat-label>
-          <input matInput [matDatepicker]="startPicker" formControlName="start">
-          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-          <mat-datepicker #startPicker></mat-datepicker>
-        </mat-form-field>
+  <form [formGroup]="range" class="row">
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Date de début</mat-label>
+        <input matInput [matDatepicker]="startPicker" formControlName="start">
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Date de fin</mat-label>
+        <input matInput [matDatepicker]="endPicker" formControlName="end">
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-card>
+
+<mat-card
+  class="daxa-card top-selling-products-card mb-25 border-radius bg-white border-none d-block"
+>
+  <mat-card-header>
+    <mat-card-title class="d-flex align-items-center justify-content-between w-100">
+      <span>Top RefArticles</span>
+      <!-- Search Input -->
+      <form class="search-box position-relative">
+        <i class="material-symbols-outlined">search</i>
+        <input
+          type="text"
+          class="input-search d-block w-100 border-none outline-0"
+          placeholder="Search RefArticle..."
+          (keyup)="applyFilter($event)"
+        />
+      </form>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <button type="button" mat-button class="card-header-menu-btn" [matMenuTriggerFor]="cardHeaderMenu">
+        Export
+      </button>
+      <mat-menu #cardHeaderMenu="matMenu" class="card-header-menu" xPosition="before">
+        <button mat-menu-item (click)="exportToExcel()">Export to Excel</button>
+        <button mat-menu-item>Print</button>
+      </mat-menu>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="top-selling-products-table">
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource">
+
+          <!-- RefArticle Column -->
+          <ng-container matColumnDef="ref">
+            <th mat-header-cell *matHeaderCellDef> RefArticle </th>
+            <td mat-cell *matCellDef="let element" class="fw-medium">
+              {{ element.ref }}
+            </td>
+          </ng-container>
+
+          <!-- Quantity Column -->
+          <ng-container matColumnDef="qte">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.qte | number:'1.0-0' }}
+            </td>
+          </ng-container>
+
+          <!-- HT Column -->
+          <ng-container matColumnDef="ht">
+            <th mat-header-cell *matHeaderCellDef> Total HT </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.ht | number:'1.3-3' }} TND
+            </td>
+          </ng-container>
+
+          <!-- TTC Column -->
+          <ng-container matColumnDef="ttc">
+            <th mat-header-cell *matHeaderCellDef> Total TTC </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.ttc | number:'1.3-3' }} TND
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">
+              No data matching the filter.
+            </td>
+          </tr>
+        </table>
       </div>
-      <div class="col-md-6">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Date de fin</mat-label>
-          <input matInput [matDatepicker]="endPicker" formControlName="end">
-          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-          <mat-datepicker #endPicker></mat-datepicker>
-        </mat-form-field>
-      </div>
-    </form>
-  </mat-card>
-  
-  <mat-card
-      class="daxa-card top-selling-products-card mb-25 border-radius bg-white border-none d-block"
-  >
-      <mat-card-header>
-          <mat-card-title>
-              <h5 class="mb-0">
-                  Top RefArticles
-              </h5>
-          </mat-card-title>
-          <mat-card-subtitle>
-              <button type="button" mat-button class="card-header-menu-btn" [matMenuTriggerFor]="cardHeaderMenu">
-                  Export
-              </button>
-              <mat-menu #cardHeaderMenu="matMenu" class="card-header-menu" xPosition="before">
-                  <button mat-menu-item (click)="exportToExcel()">
-                      Export to Excel
-                  </button>
-                  <button mat-menu-item>
-                      Print
-                  </button>
-              </mat-menu>
-          </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-          <div class="top-selling-products-table">
-              <div class="table-responsive">
-                  <table mat-table [dataSource]="dataSource">
-  
-                      <!-- RefArticle Column -->
-                      <ng-container matColumnDef="ref">
-                          <th mat-header-cell *matHeaderCellDef> RefArticle </th>
-                          <td mat-cell *matCellDef="let element" class="fw-medium">
-                              {{element.ref}}
-                          </td>
-                      </ng-container>
-  
-                      <!-- Quantity Column -->
-                      <ng-container matColumnDef="qte">
-                          <th mat-header-cell *matHeaderCellDef> Quantity </th>
-                          <td mat-cell *matCellDef="let element">
-                              {{element.qte | number:'1.0-0'}}
-                          </td>
-                      </ng-container>
-  
-                      <!-- HT Column -->
-                      <ng-container matColumnDef="ht">
-                          <th mat-header-cell *matHeaderCellDef> Total HT </th>
-                          <td mat-cell *matCellDef="let element">
-                              {{element.ht | number:'1.3-3'}} TND
-                          </td>
-                      </ng-container>
-  
-                      <!-- TTC Column -->
-                      <ng-container matColumnDef="ttc">
-                          <th mat-header-cell *matHeaderCellDef> Total TTC </th>
-                          <td mat-cell *matCellDef="let element">
-                              {{element.ttc | number:'1.3-3'}} TND
-                          </td>
-                      </ng-container>
-  
-                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
-                  </table>
-              </div>
-              <mat-paginator 
-                  [pageSizeOptions]="[5, 10, 20]" 
-                  showFirstLastButtons
-                  [length]="allRefArticles.length"
-                  [pageSize]="pageSize"
-                  (page)="onPageChange($event)">
-              </mat-paginator>
-          </div>
-      </mat-card-content>
-  </mat-card>
+
+      <mat-paginator 
+        [pageSizeOptions]="[5, 10, 20]" 
+        showFirstLastButtons
+        [length]="allRefArticles.length"
+        [pageSize]="pageSize"
+        (page)="onPageChange($event)">
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

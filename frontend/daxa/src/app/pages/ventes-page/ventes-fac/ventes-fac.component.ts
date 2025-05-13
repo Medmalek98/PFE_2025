@@ -100,7 +100,6 @@ export class VentesFACComponent implements OnInit {
   prepareChartData(data: any[]): void {
     const groupedByDate: { [key: string]: number } = {};
 
-    // Group data by date
     data.forEach((v) => {
       const date = new Date(v.Date); 
       const dateKey = date.toISOString().split('T')[0]; // Group by date (yyyy-MM-dd)
@@ -122,4 +121,3 @@ export class VentesFACComponent implements OnInit {
 }
 
 }
-

@@ -1,6 +1,13 @@
-<div class="daxa-form ml-auto mr-auto border-radius bg-white" [class.card-borderd-theme]="themeService.isCardBorder()"
-  [class.component-dark-theme]="themeService.isDark()" [class.rtl-enabled]="themeService.isRTLEnabled()">
 
+
+<div
+        class="daxa-form ml-auto mr-auto border-radius bg-white"
+        [class.card-borderd-theme]="themeService.isCardBorder()"
+        [class.component-dark-theme]="themeService.isDark()"
+        [class.rtl-enabled]="themeService.isRTLEnabled()"
+      >
+
+<div class="daxa-form ml-auto mr-auto border-radius bg-white">
   <div class="d-flex justify-content-center">
     <h5 class="mb-0">Delivery Tape</h5>
   </div>  
@@ -35,4 +42,5 @@
       <app-date-range-revenue [totalRevenueInDateRange]="totalRevenueInDateRange"></app-date-range-revenue>
     </div>
   </div>
+</div>
 </div>

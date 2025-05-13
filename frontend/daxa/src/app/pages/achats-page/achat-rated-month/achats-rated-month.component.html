@@ -1,0 +1,43 @@
+<div
+  class="daxa-card mb-25 border-radius bg-white border-none d-block"
+  [class.card-borderd-theme]="themeService.isCardBorder()"
+  [class.component-dark-theme]="themeService.isDark()"
+  [class.rtl-enabled]="themeService.isRTLEnabled()">
+  
+  <mat-card class="mb-4 p-3">
+    <form [formGroup]="range" class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Date de début</mat-label>
+          <input matInput [matDatepicker]="startPicker" formControlName="start">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Date de fin</mat-label>
+          <input matInput [matDatepicker]="endPicker" formControlName="end">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card>
+
+<mat-card class="daxa-card mb-25 border-radius bg-white border-none d-block">
+    <mat-card-header>
+      <mat-card-title>
+        <h5 class="mb-0">Montant HT par Mois</h5>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="highestMonth" class="highest-month-note mb-3">
+        <strong>{{ highestMonth.name }}</strong> has the highest purchases with {{ highestMonth.value.toFixed(2) }} DT
+      </div>
+      <div *ngIf="isLoading" class="loading-spinner">Chargement des données...</div>
+      <div *ngIf="!isLoading && isChartReady" id="inflation-column-chart" style="min-height: 400px;"></div>
+      <div *ngIf="!isLoading && !isChartReady" class="text-center text-muted">Aucune donnée disponible pour la période sélectionnée.</div>
+    </mat-card-content>
+  </mat-card>
+</div>

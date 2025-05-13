@@ -206,6 +206,8 @@ import { VentesBLComponent } from './pages/ventes-page/ventes-bl/ventes-bl.compo
 import { VentesFACComponent } from './pages/ventes-page/ventes-fac/ventes-fac.component';
 import { AchatsPageComponent } from './pages/achats-page/achats-page.component';
 import { AchatsListComponent } from './pages/achats-page/achat-list/achats-list.component';
+import { AchatsRatedMonthComponent } from './pages/achats-page/achat-rated-month/achats-rated-month.component';
+import { AchatsPerArticleComponent } from './pages/achats-page/achat-per-article/achats-per-article.component';
 
 
 export const routes: Routes = [
@@ -296,7 +298,9 @@ export const routes: Routes = [
         component: AchatsPageComponent,
         children: [
           { path: '', redirectTo: 'achats-page', pathMatch: 'full' },
-          { path: 'achats-list', component: AchatsListComponent }
+          { path: 'achats-list', component: AchatsListComponent },
+          { path: 'achats-rated-month', component: AchatsRatedMonthComponent },
+          { path: 'achats-per-article', component: AchatsPerArticleComponent }
 
         ]
       },  
