@@ -46,13 +46,89 @@ export class VentesFACComponent implements OnInit {
   totalRevenue: number = 0;
   totalRevenueInDateRange: number = 0;
 
-  chartOptions: ChartOptions = {
-    series: [{ name: 'HT', data: [] }],
-    chart: { type: 'line', height: 350 },
-    xaxis: { categories: [] },
-    stroke: { curve: 'smooth' },
-    dataLabels: { enabled: false }
-  };
+chartOptions: ChartOptions = {
+    series: [{ 
+        name: 'HT', 
+        data: [],
+        color: '#0f79f3' 
+    }],
+    chart: {
+        type: 'line',
+        height: 350,
+        foreColor: '#475569',
+        toolbar: {
+            show: true,
+            tools: {
+                download: true,
+                selection: false,
+                zoom: false,
+                zoomin: false,
+                zoomout: false,
+                pan: false,
+                reset: false
+            }
+        },
+        background: 'transparent' 
+    },
+    stroke: {
+        curve: 'straight', 
+        width: 2,
+        colors: ['#0f79f3']
+    },
+    dataLabels: {
+        enabled: false
+    },
+    grid: {
+        show: true,
+        borderColor: '#e2e8f0', 
+        strokeDashArray: 5, 
+        row: {
+            colors: ['#f8fafc', 'transparent'], 
+            opacity: 0.5
+        }
+    },
+    xaxis: {
+        categories: [],
+        axisBorder: {
+            show: false 
+        },
+        axisTicks: {
+            show: true,
+            color: '#e2e8f0'
+        },
+        labels: {
+            style: {
+                colors: '#64748b', 
+                fontSize: '12px'
+            }
+        }
+    },
+    yaxis: {
+        labels: {
+            style: {
+                colors: '#64748b', 
+                fontSize: '12px'
+            },
+            formatter: (value) => {
+                return value.toFixed(2); 
+            }
+        },
+        axisBorder: {
+            show: false
+        }
+    },
+    tooltip: {
+        style: {
+            fontSize: '12px',
+            fontFamily: 'inherit'
+        },
+        y: {
+            formatter: (value) => {
+                return value.toFixed(2); 
+            }
+        }
+    }
+};
 
   constructor(
     private http: HttpClient,
@@ -102,14 +178,14 @@ export class VentesFACComponent implements OnInit {
 
     data.forEach((v) => {
       const date = new Date(v.Date); 
-      const dateKey = date.toISOString().split('T')[0]; // Group by date (yyyy-MM-dd)
+      const dateKey = date.toISOString().split('T')[0]; 
       groupedByDate[dateKey] = (groupedByDate[dateKey] || 0) + v.HT;
     });
 
     // Sort dates and limit to 90 days
     const sortedDates = Object.keys(groupedByDate)
                               .sort()
-                              .slice(-90); // Get the last 90 days
+                              .slice(-90);
 
     const chartValues = sortedDates.map((date) => groupedByDate[date]);
 

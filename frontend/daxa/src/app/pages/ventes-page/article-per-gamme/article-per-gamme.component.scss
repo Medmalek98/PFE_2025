@@ -1,0 +1,63 @@
+.justify-center {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100%;
+}
+
+.mat-card-title.text-center {
+  text-align: center !important;
+  width: 100%;
+}
+
+.fw-bold {
+  font-weight: 600;
+}
+
+.daxa-card {
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.search-box {
+  position: relative;
+
+  i.material-symbols-outlined {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+  }
+
+  .input-search {
+    padding-left: 2.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+}
+
+.gamme-line {
+  padding: 0.25rem 0;
+  border-bottom: 1px dashed #ddd;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+  max-width: 250px;
+}
+
+.mat-elevation-z2 {
+  margin-top: 1rem;
+  background: white;
+}
+
+table {
+  width: 100%;
+}

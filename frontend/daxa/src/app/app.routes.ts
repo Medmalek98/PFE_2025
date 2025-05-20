@@ -208,6 +208,7 @@ import { AchatsPageComponent } from './pages/achats-page/achats-page.component';
 import { AchatsListComponent } from './pages/achats-page/achat-list/achats-list.component';
 import { AchatsRatedMonthComponent } from './pages/achats-page/achat-rated-month/achats-rated-month.component';
 import { AchatsPerArticleComponent } from './pages/achats-page/achat-per-article/achats-per-article.component';
+import { ArticlePerGammeComponent } from './pages/ventes-page/article-per-gamme/article-per-gamme.component';
 
 
 export const routes: Routes = [
@@ -221,7 +222,7 @@ export const routes: Routes = [
     },
 
     
-    { path: 'ecommerce', component: EcommerceComponent },
+    // { path: 'ecommerce', component: EcommerceComponent },
     { path: 'crm', component: CrmComponent },
     { path: 'ventes', component: VentesComponent },
     { path: 'achats', component: AchatsPageComponent },
@@ -287,9 +288,11 @@ export const routes: Routes = [
         path: 'ventes',
         component: VentesComponent,
         children: [
-          { path: '', redirectTo: 'ventes-bl', pathMatch: 'full' },
+          { path: '', redirectTo: 'ventes', pathMatch: 'full' },
           { path: 'ventes-bl', component: VentesBLComponent },
-          { path: 'ventes-fac', component: VentesFACComponent }
+          { path: 'ventes-fac', component: VentesFACComponent },
+          { path: 'article-per-gamme', component: ArticlePerGammeComponent }
+
         ]
       },
 

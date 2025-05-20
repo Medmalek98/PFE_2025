@@ -4,13 +4,14 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CustomizerSettingsService } from '../../../customizer-settings/customizer-settings.service';
 import { Subscription } from 'rxjs';
-import { StorageService } from '../../../services/StorageService ';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
+import { StorageService } from '../../../services/StorageService ';
+
 
 @Component({
   selector: 'app-achats-per-article',
@@ -21,7 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDatepickerModule,  
+    MatDatepickerModule,
     MatProgressSpinnerModule,
     MatIconModule
   ],
@@ -30,7 +31,6 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AchatsPerArticleComponent implements OnInit, OnDestroy {
   private charts: { top: ApexCharts | null, bottom: ApexCharts | null } = { top: null, bottom: null };
-  private isBrowser: boolean;
   private dateSubscription: Subscription | null = null;
   public isLoading = false;
   public isChartReady = { top: false, bottom: false };
@@ -39,53 +39,27 @@ export class AchatsPerArticleComponent implements OnInit, OnDestroy {
     end: new FormControl<Date | null>(null),
   });
 
-  constructor(
-    public themeService: CustomizerSettingsService,
-    private http: HttpClient,
-    private storageService: StorageService,
-    @Inject(PLATFORM_ID) private platformId: any
-  ) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-    this.initializeDateRange();
-  }
-
-  private initializeDateRange(): void {
-    const endDate = new Date();
-    const startDate = new Date();
-    startDate.setMonth(endDate.getMonth() - 3);
-    this.range.patchValue({ start: startDate, end: endDate });
-  }
+    constructor(private http: HttpClient, 
+      private storageService: StorageService,
+      public themeService :CustomizerSettingsService
+    ) {}
 
   ngOnInit(): void {
-    if (this.isBrowser) {
-      this.dateSubscription = this.range.valueChanges.subscribe(value => {
-        if (value.start && value.end) {
-          this.fetchData(value.start, value.end);
-        }
-      });
-
-      const start = this.range.value.start;
-      const end = this.range.value.end;
-      if (start && end) this.fetchData(start, end);
-    }
+    this.range.valueChanges.subscribe(value => {
+      if (value.start && value.end) {
+        this.fetchData(value.start, value.end);
+      }
+    });
   }
 
   fetchData(start: Date, end: Date): void {
-    if (!this.isBrowser || !start || !end) return;
-
-    this.isLoading = true;
-    this.isChartReady = { top: false, bottom: false };
-
     const ip = this.storageService.getItem('selectedSocieteIp');
-    if (!ip) {
-      this.isLoading = false;
-      return;
-    }
+    if (!ip) return;
 
-    const formatDate = (date: Date) => date.toISOString().split('T')[0];
-    const url = `http://${ip}/api/ACHATS?_debut=${formatDate(start)}&_fin=${formatDate(end)}`;
+    const debut = start.toLocaleDateString('fr-FR');
+    const fin = end.toLocaleDateString('fr-FR');
+    const url = `http://${ip}/api/ACHATS?_debut=${debut}&_fin=${fin}`;
 
-    console.log('Fetching data from:', url);
     this.http.get<any[]>(url).subscribe({
       next: (data) => this.handleDataSuccess(data),
       error: (err) => this.handleDataError(err)
@@ -93,7 +67,6 @@ export class AchatsPerArticleComponent implements OnInit, OnDestroy {
   }
 
   private handleDataSuccess(data: any[]): void {
-    console.log('Data received:', data);
     this.processChartData(data);
   }
 
@@ -103,141 +76,84 @@ export class AchatsPerArticleComponent implements OnInit, OnDestroy {
     this.isChartReady = { top: true, bottom: true };
   }
 
-  private processChartData(data: any[]): void {
-    const articleCounts = data
-      .filter(item => item.RefArticle)
-      .reduce((acc: { [key: string]: number }, item) => {
-        acc[item.RefArticle] = (acc[item.RefArticle] || 0) + 1;
-        return acc;
-      }, {});
+private processChartData(data: any[]): void {
+  const articleQuantities = data
+    .filter(item => item.RefArticle && item.Qte)
+    .reduce((acc: { [key: string]: number }, item) => {
+      acc[item.RefArticle] = (acc[item.RefArticle] || 0) + item.Qte;
+      return acc;
+    }, {});
 
-    const allArticles = Object.entries(articleCounts).sort((a, b) => b[1] - a[1]);
-    const totalPurchases = allArticles.reduce((sum, [_, count]) => sum + count, 0);
+  const allArticles = Object.entries(articleQuantities)
+    .sort((a, b) => b[1] - a[1]);
 
-    // Process Top 10
-    const top10 = allArticles.slice(0, 10);
-    const top10Total = top10.reduce((sum, [_, count]) => sum + count, 0);
-    const top10Percentage = (top10Total / totalPurchases) * 100;
+  const totalQte = allArticles.reduce((sum, [_, qte]) => sum + qte, 0);
 
-    // Process Bottom 10
-    const bottom10 = allArticles.slice(-10);
-    const bottom10Total = bottom10.reduce((sum, [_, count]) => sum + count, 0);
-    const bottom10Percentage = (bottom10Total / totalPurchases) * 100;
+  const top10 = allArticles.slice(0, 10);
+  const top10Total = top10.reduce((sum, [_, qte]) => sum + qte, 0);
+  const othersTotal = totalQte - top10Total;
 
-    // Render charts with partial percentages
-    this.renderPartialPieChart(
-      top10,
-      'top',
-      `Top 10 Articles (${top10Percentage.toFixed(1)}% of Total Purchases)`,
-      totalPurchases
-    );
-
-    this.renderPartialPieChart(
-      bottom10,
-      'bottom',
-      `Bottom 10 Articles (${bottom10Percentage.toFixed(1)}% of Total Purchases)`,
-      totalPurchases
-    );
+  const finalArticles: [string, number][] = [...top10];
+  if (othersTotal > 0) {
+    finalArticles.push(['Others', othersTotal]);
   }
 
-  private async renderPartialPieChart(
-    articles: [string, number][],
-    position: 'top' | 'bottom',
-    title: string,
-    totalPurchases: number
-  ): Promise<void> {
-    if (!this.isBrowser) return;
+  this.renderCombinedPieChart(
+    finalArticles,
+    'top',
+    `Top 10 Articles Purchased + Others (Total Qty: ${totalQte})`,
+    totalQte
+  );
+}
 
-    const chartId = `article_pie_chart_${position}`;
-    await new Promise(resolve => setTimeout(resolve, 50));
-    const chartElement = document.getElementById(chartId);
 
-    if (!chartElement) {
-      console.error(`Chart container #${chartId} not found`);
-      this.isChartReady[position] = true;
-      return;
-    }
+ private async renderCombinedPieChart(
+  articles: [string, number][],
+  position: 'top' | 'bottom',
+  title: string,
+  totalQte: number
+): Promise<void> {
 
-    try {
-      chartElement.style.visibility = 'visible';
-      chartElement.style.opacity = '1';
-      chartElement.style.height = 'auto';
-      chartElement.style.width = 'auto';
+  const chartId = `article_pie_chart_${position}`;
+  const chartElement = document.getElementById(chartId);
 
-      const ApexCharts = (await import('apexcharts')).default;
-      const labels = articles.map(([article]) => article);
-      const series = articles.map(([_, count]) => count);
-      const totalShare = series.reduce((sum, count) => sum + count, 0) / totalPurchases;
-
-      const options = {
-        series: series,
-        chart: {
-          type: 'pie',
-          height: 400
-        },
-        labels: labels,
-        title: {
-          text: title,
-          align: 'left',
-          style: {
-            fontSize: '16px',
-            color: '#475569'
-          }
-        },
-        plotOptions: {
-          pie: {
-            startAngle: -90,
-            endAngle: 90,
-            expandOnClick: false,
-            donut: {
-              labels: {
-                show: true,
-                total: {
-                  show: true,
-                  label: 'Total Shown',
-                  formatter: () => `${(totalShare * 100).toFixed(1)}% of all purchases`
-                }
-              }
-            }
-          }
-        },
-        dataLabels: {
-          enabled: true,
-          formatter: (val: number, { seriesIndex }: any) => {
-            const percentage = (series[seriesIndex] / totalPurchases) * 100;
-            return `${percentage.toFixed(1)}%`;
-          },
-          style: {
-            fontSize: '12px'
-          }
-        },
-        tooltip: {
-          y: {
-            formatter: (val: number) => {
-              const percentage = (val / totalPurchases) * 100;
-              return `${percentage.toFixed(1)}% of total purchases`;
-            }
-          }
-        },
-        responsive: [{
-          breakpoint: 768,
-          options: {
-            chart: { height: 300 },
-            legend: { position: 'bottom' }
-          }
-        }]
-      };
-
-      this.charts[position]?.destroy();
-      this.charts[position] = new ApexCharts(chartElement, options);
-      await this.charts[position]?.render();
-    } catch (error) {
-      console.error(`Error rendering ${position} chart:`, error);
-    } finally {
-      this.isChartReady[position] = true;
-      this.isLoading = false;
-    }
+  if (!chartElement) {
+    console.error(`Chart container #${chartId} not found`);
+    this.isChartReady[position] = true;
+    return;
   }
+
+  try {
+    const ApexCharts = (await import('apexcharts')).default;
+    const labels = articles.map(([article]) => article);
+    const series = articles.map(([_, qte]) => qte);
+
+    const options = {
+      series: series,
+      chart: { type: 'pie', height: 400 },
+      labels: labels,
+      title: { text: title },
+      tooltip: {
+        y: {
+          formatter: (val: number) => {
+            const percentage = (val / totalQte) * 100;
+            return `${val} units (${percentage.toFixed(1)}%)`;
+          }
+        }
+      }
+    };
+
+    this.charts[position]?.destroy();
+    this.charts[position] = new ApexCharts(chartElement, options);
+    await this.charts[position]?.render();
+  } catch (error) {
+    console.error(`Error rendering ${position} chart:`, error);
+  } finally {
+    this.isChartReady[position] = true;
+    this.isLoading = false;
+  }
+}
+
 
   ngOnDestroy(): void {
     this.dateSubscription?.unsubscribe();

@@ -3,6 +3,55 @@
     font-size: 25px;
     font-weight: 600;
     margin-bottom: 12px;
-    color: #3f51b5; // Couleur Material primaire
-  }
-  
+    color: #3f88f5; // Changed to the same blue as the chart
+}
+
+.daxa-card {
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.daxa-form {
+    .mat-card {
+        background-color: rgba(255, 255, 255, 0.8); // Slightly transparent white
+        border: 1px solid #e2e8f0; // Matching the chart grid color
+        
+        .mat-form-field {
+            .mat-form-field-outline {
+                color: #e2e8f0; // Matching the chart grid color
+            }
+            
+            .mat-input-element {
+                color: #334155; // Dark enough for light mode, light enough for dark
+            }
+            
+            .mat-form-field-label {
+                color: #64748b; // Matching the chart text color
+            }
+        }
+    }
+}
+
+// For dark theme compatibility
+.component-dark-theme {
+    .daxa-form {
+        .mat-card {
+            background-color: rgba(30, 41, 59, 0.8); // Slightly transparent dark
+            border-color: #334155; // Darker border
+            
+            .mat-form-field {
+                .mat-form-field-outline {
+                    color: #334155;
+                }
+                
+                .mat-input-element {
+                    color: #e2e8f0; // Lighter text
+                }
+                
+                .mat-form-field-label {
+                    color: #94a3b8; // Lighter label
+                }
+            }
+        }
+    }
+}

@@ -1,14 +1,15 @@
-<div class="daxa-form ml-auto mr-auto border-radius bg-white"
-  [class.card-bordered-theme]="themeService.isCardBorder()"
+<div
+  class="daxa-card mb-25 border-radius bg-white border-none d-block"
+  [class.card-borderd-theme]="themeService.isCardBorder()"
   [class.component-dark-theme]="themeService.isDark()"
   [class.rtl-enabled]="themeService.isRTLEnabled()">
-
-  <!-- Date Picker -->
+  
+<mat-card class="daxa-card mb-25 border-radius bg-white border-none d-block">
   <mat-card class="mb-4 p-3">
     <form [formGroup]="range" class="row">
       <div class="col-md-6">
         <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Start Date</mat-label>
+          <mat-label>Date de début</mat-label>
           <input matInput [matDatepicker]="startPicker" formControlName="start">
           <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
           <mat-datepicker #startPicker></mat-datepicker>
@@ -16,7 +17,7 @@
       </div>
       <div class="col-md-6">
         <mat-form-field appearance="outline" class="w-100">
-          <mat-label>End Date</mat-label>
+          <mat-label>Date de fin</mat-label>
           <input matInput [matDatepicker]="endPicker" formControlName="end">
           <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
           <mat-datepicker #endPicker></mat-datepicker>
@@ -24,12 +25,12 @@
       </div>
     </form>
   </mat-card>
+  </mat-card>
 
-  <!-- Charts Container -->
-  <mat-card class="chart-container">
+  <mat-card class="daxa-card mb-25 border-radius bg-white border-none d-block">
     <mat-card-header>
       <mat-card-title>
-        <h5 class="title" [class.text-white]="themeService.isDark()">Distribution by article</h5>
+        <h5 class="title" [class.text-white]="themeService.isDark()">Purchased Articles vs Saled Articles By Quantity</h5>
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -38,13 +39,13 @@
       </div>
 
       <div class="charts-wrapper">
-        <div id="article_pie_chart_top" class="chart-item" [class.hidden]="!isChartReady.top"></div>
-        <div id="article_pie_chart_bottom" class="chart-item" [class.hidden]="!isChartReady.bottom"></div>
+        <div id="article_pie_chart_top" class="chart-item"></div>
+        <div id="article_pie_chart_bottom" class="chart-item"></div>
       </div>
 
       <div *ngIf="!isLoading && (!isChartReady.top || !isChartReady.bottom)" class="no-data">
         <mat-icon>info</mat-icon>
-        <span>No data available for this period</span>
+        <span>Select date range to view data</span>
       </div>
     </mat-card-content>
   </mat-card>

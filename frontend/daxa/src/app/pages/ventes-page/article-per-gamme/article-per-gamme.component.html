@@ -1,1 +1,58 @@
-<p>article-per-gamme works!</p>
+<mat-card class="daxa-card mb-25 border-radius bg-white border-none d-block">
+  <mat-card class="mb-4 p-3">
+    <form [formGroup]="range" class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Date de début</mat-label>
+          <input matInput [matDatepicker]="startPicker" formControlName="start">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Date de fin</mat-label>
+          <input matInput [matDatepicker]="endPicker" formControlName="end">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card>
+</mat-card>  
+
+<div class="daxa-form ml-auto mr-auto border-radius bg-white"
+ [class.card-borderd-theme]="themeService.isCardBorder()"
+  [class.component-dark-theme]="themeService.isDark()" 
+  [class.rtl-enabled]="themeService.isRTLEnabled()">
+  
+  <mat-card class="daxa-card mb-25 border-radius bg-white border-none d-block">
+    <mat-card-header class="justify-center">
+      <mat-card-title class="w-100 text-center">
+        <h5 class="fw-bold m-0" [class.text-white]="themeService.isDark()">Article By "Gamme1"</h5>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-accordion class="expansion-container">
+      <h5>Article Reference :</h5>
+      <mat-expansion-panel *ngFor="let ref of paginatedArticles">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ ref.RefArticle }}
+          </mat-panel-title>
+          <mat-panel-description>
+            Total Qte: {{ ref.totalQte }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <h5>Gamme 1 :</h5>
+        <div *ngFor="let gamme of ref.gammes" class="gamme-line">
+          <strong>{{ gamme.gamme }}</strong>: {{ gamme.totalQte }}
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons [length]="topRefArticles.length"
+      [pageSize]="pageSize" (page)="onPageChange($event)">
+    </mat-paginator>
+  </mat-card>
+</div>
