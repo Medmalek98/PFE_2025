@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { CustomizerSettingsService } from '../../../customizer-settings/customizer-settings.service';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-mes-societe-list',
@@ -18,8 +19,9 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
-    ReactiveFormsModule    
-    ],
+    ReactiveFormsModule,
+    MatDialogModule 
+  ],
   templateUrl: './mes-societe-list.component.html',
   styleUrls: ['./mes-societe-list.component.scss']
 })
@@ -35,6 +37,7 @@ export class MesSocieteListComponent implements OnInit {
     private authService: AuthService,
     public themeService: CustomizerSettingsService,
     private router: Router,
+    private dialog: MatDialog
     
   ) {
     this.societeForm = this.fb.group({
@@ -60,20 +63,42 @@ export class MesSocieteListComponent implements OnInit {
     });
   }
 
-  onSelectSociete(): void {
-    const selected = this.societeForm.value.selectedSociete;
+ onSelectSociete(): void {
+  const selected: Societe = this.societeForm.value.selectedSociete;
 
-    if (selected) {
-      const selectedIp = selected.ipadresse;
-      console.log('Adresse IP sélectionnée :', selectedIp);
-      localStorage.removeItem('selectedSocieteIp');
-      localStorage.setItem('selectedSocieteIp', selectedIp);
+  if (selected) {
+    const today = new Date();
+    const finDate = new Date(selected.finContract); // exemple : '2025-06-02'
 
-        this.router.navigate(['/ventes'], {
-        queryParams: { ip: selectedIp }
-      });
+    // Vérifie si la société est expirée
+    if (finDate <= today) {
+      alert('Cette société est expirée. Vous ne pouvez pas y accéder.');
+      return;
     }
 
+    const selectedIp = selected.ipadresse;
+    localStorage.removeItem('selectedSocieteIp');
+    localStorage.setItem('selectedSocieteIp', selectedIp);
+
+    this.router.navigate(['/ventes'], {
+      queryParams: { ip: selectedIp }
+    });
   }
+}
+
+
+isSocieteExpired(societe: Societe): boolean {
+  if (!societe.finContract) return false;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // ignore l'heure
+
+  const finDate = new Date(societe.finContract);
+  finDate.setHours(0, 0, 0, 0); // ignore aussi l'heure
+
+  return finDate < today; // expirer seulement si la date est avant aujourd'hui
+}
+
+ 
 }
   

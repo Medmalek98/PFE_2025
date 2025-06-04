@@ -1,12 +1,9 @@
 <div class="sign-up-area">
     <div class="d-table">
         <div class="d-table-cell">
-            <div
-                class="daxa-form ml-auto mr-auto border-radius bg-white"
+            <div class="daxa-form ml-auto mr-auto border-radius bg-white"
                 [class.card-borderd-theme]="themeService.isCardBorder()"
-                [class.component-dark-theme]="themeService.isDark()"
-                [class.rtl-enabled]="themeService.isRTLEnabled()"
-            >
+                [class.component-dark-theme]="themeService.isDark()" [class.rtl-enabled]="themeService.isRTLEnabled()">
                 <div class="title text-center">
                     <h3>
                         Sign Up
@@ -26,17 +23,19 @@
                             </mat-label>
                             <input matInput type="text" id="name" formControlName="name">
                         </mat-form-field>
-                        <div class="error text-danger" *ngIf="authForm.get('name')!.hasError('required') && authForm.get('name')!.touched">
+                        <div class="error text-danger"
+                            *ngIf="authForm.get('name')!.hasError('required') && authForm.get('name')!.touched">
                             Name is required.
                         </div>
-                        <div class="error text-danger" *ngIf="authForm.get('name')!.hasError('name') && authForm.get('name')!.touched">
+                        <div class="error text-danger"
+                            *ngIf="authForm.get('name')!.hasError('name') && authForm.get('name')!.touched">
                             Please enter a valid name.
                         </div>
                     </div>
 
-                    
+
                     <label class="main-label d-block lh-1 text-black">
-                       UserName
+                        UserName
                     </label>
                     <mat-form-field>
                         <mat-label>
@@ -57,27 +56,27 @@
                             </mat-label>
                             <input matInput type="email" id="email" formControlName="email">
                         </mat-form-field>
-                        <div class="error text-danger" *ngIf="authForm.get('email')!.hasError('required') && authForm.get('email')!.touched">
+                        <div class="error text-danger"
+                            *ngIf="authForm.get('email')!.hasError('required') && authForm.get('email')!.touched">
                             Email is required.
                         </div>
-                        <div class="error text-danger" *ngIf="authForm.get('email')!.hasError('email') && authForm.get('email')!.touched">
+                        <div class="error text-danger"
+                            *ngIf="authForm.get('email')!.hasError('email') && authForm.get('email')!.touched">
                             Please enter a valid email address.
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label class="main-label d-block lh-1 text-black">Role</label>
-                        <mat-form-field>
-                            <mat-label>Select role</mat-label>
-                            <mat-select formControlName="roles" multiple>
-                                <mat-option value="ROLE_USER">ROLE_USER</mat-option>
-                                <mat-option value="ROLE_ADMIN">ROLE_ADMIN</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <div class="error text-danger" *ngIf="authForm.get('roles')!.hasError('required') && authForm.get('roles')!.touched">
-                            At least one role is required.
+                        <mat-radio-group formControlName="roles">
+                            <mat-radio-button value="ROLE_USER">ROLE_USER</mat-radio-button>
+                            <mat-radio-button value="ROLE_ADMIN">ROLE_ADMIN</mat-radio-button>
+                        </mat-radio-group>
+                        <div class="error text-danger"
+                            *ngIf="authForm.get('roles')!.hasError('required') && authForm.get('roles')!.touched">
+                            A role is required.
                         </div>
-                    </div>                    
-                    
+                    </div>
                     <div class="form-group">
                         <label class="main-label d-block lh-1 text-black">
                             Your Password
@@ -86,17 +85,21 @@
                             <mat-label>
                                 Enter your password
                             </mat-label>
-                            <input matInput [type]="hide ? 'password' : 'text'" id="password" formControlName="password">
-                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <input matInput [type]="hide ? 'password' : 'text'" id="password"
+                                formControlName="password">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
                                 <span class="material-symbols-outlined">
                                     {{hide ? 'visibility_off' : 'visibility'}}
                                 </span>
                             </button>
                         </mat-form-field>
-                        <div class="error text-danger" *ngIf="authForm.get('password')!.hasError('required') && authForm.get('password')!.touched">
+                        <div class="error text-danger"
+                            *ngIf="authForm.get('password')!.hasError('required') && authForm.get('password')!.touched">
                             Password is required.
                         </div>
-                        <div class="error text-danger" *ngIf="authForm.get('password')!.hasError('minlength') && authForm.get('password')!.touched">
+                        <div class="error text-danger"
+                            *ngIf="authForm.get('password')!.hasError('minlength') && authForm.get('password')!.touched">
                             Password must be at least 8 characters long.
                         </div>
                     </div>

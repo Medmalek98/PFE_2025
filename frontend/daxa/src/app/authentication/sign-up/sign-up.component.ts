@@ -2,19 +2,18 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { CustomizerSettingsService } from '../../customizer-settings/customizer-settings.service';
 import { UserController } from '../../controller/UserController';
 import { User } from '../../model/user';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
     selector: 'app-sign-up',
-    imports: [RouterLink, MatFormFieldModule, MatInputModule, MatSelectModule,MatButtonModule, MatCheckboxModule, ReactiveFormsModule, NgIf],
+    imports: [MatFormFieldModule, MatInputModule, MatRadioModule ,MatButtonModule, MatCheckboxModule, ReactiveFormsModule, NgIf],
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss'
 })
@@ -62,7 +61,7 @@ export class SignUpComponent {
             email: this.authForm.value.email,
             password: this.authForm.value.password,
             username: this.authForm.value.username,
-            roles: this.authForm.value.roles.map((role: string) => ({ name: role }))
+            roles: [{ name: this.authForm.value.roles }]
           };
       
           this.userController.addUser(user).subscribe({
